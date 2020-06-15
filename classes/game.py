@@ -1,6 +1,7 @@
 import random
 
 
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -13,7 +14,7 @@ class bcolors:
 
 
 class Person:
-    def __init__(self, hp, mp, atk, df, magic):
+    def __init__(self, hp, mp, atk, df, magic, items):
         self.maxhp = hp
         self.hp = hp
 
@@ -25,15 +26,11 @@ class Person:
 
         self.df = df
         self.magic = magic
-        self.actions = ["Attack", "Magic"]
+        self.items = items
+        self.actions = ["Attack", "Magic", "Items"]
 
     def generate_damage(self):
         return random.randrange(self.atkl,self.atkh)
-
-    def generate_spell_damage(self, i):
-         mgl = self.magic[i]["dmg"] - 5
-         mgh = self.magic[i]["dmg"] + 5
-         return random.randrange(mgl, mgh)
 
     def take_damage(self, dmg):
         self.hp -= dmg
@@ -61,23 +58,24 @@ class Person:
     def reduce_mp(self, cost):
         self.mp -= cost
 
-    def get_spell_name(self, i):
-        return self.magic[i]["name"]
-
-    def get_spell_mp_cost(self, i):
-        return self.magic[i]["cost"]
-
     def choose_action(self):
         i = 1
-        print(bcolors.OKBLUE + bcolors.BOLD + "Actions" + bcolors.ENDC)
+        print("\n" + bcolors.OKBLUE + bcolors.BOLD + "ACTIONS" + bcolors.ENDC)
         for item in self.actions:
-            print(str(i) + ":", item)
+            print("    " + str(i) + ".", item)
             i += 1
 
     def choose_magic(self):
         i = 1
-        print(bcolors.OKBLUE + bcolors.BOLD + "Magic" + bcolors.ENDC)
+        print("\n" + bcolors.OKBLUE + bcolors.BOLD + "MAGIC" + bcolors.ENDC)
         for spell in self.magic:
-            print(str(i) + ":", spell["name"], "(cost:", str(spell["cost"]) + ")")
+            print("    " + str(i) + ".", spell.name, "(cost:", str(spell.cost) + ")")
             i += 1
 
+    def choose_item(self):
+        i = 1
+
+        print("\n" + bcolors.OKGREEN + bcolors.BOLD + "ITEMS" + bcolors.ENDC)
+        for item in self.items:
+            print("    " + str(i) + ".", item.name, ":", item.description, " (x5)")
+            i += 1
