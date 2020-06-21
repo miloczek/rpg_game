@@ -25,7 +25,9 @@ dancing_star = Item("Dancing Star", "attack", "Deals 500 damage", 500)
 
 
 player_magic = [igni, aard, yrden, cure, vitality]
-player_items = [swallow, enhanced_swallow, superior_swallow, thunderbolt, full_moon, dancing_star]
+player_items = [{"item": swallow, "quantity": 15}, {"item": enhanced_swallow, "quantity": 5},
+                {"item": superior_swallow, "quantity": 5}, {"item":thunderbolt, "quantity": 5},
+                {"item": full_moon, "quantity": 2}, {"item":dancing_star, "quantity": 5}]
 
 #Characters
 player = Person(460, 65, 60, 34, player_magic, player_items)
@@ -79,11 +81,23 @@ while running:
         if item_choice == -1:
             continue
 
-        item = player.items[item_choice]
+        item = player.items[item_choice]["item"]
+        if player.items[item_choice]["quantity"] == 0:
+            print(bcolors.FAIL + "\n" + "None left..." + bcolors.ENDC)
+            continue
+        player.items[item_choice]["quantity"] -= 1
+
 
         if item.type == "potion":
             player.heal(item.prop)
             print(bcolors.OKGREEN + "\n" + item.name + " heals for " + str(item.prop) + " HP"  + bcolors.ENDC)
+        elif item.type == "elixir":
+            player.hp = player.maxhp
+            player.mp = player.maxmp
+            print(bcolors.OKGREEN + "\n" + item.name + " fully restores HP/MP" + bcolors.ENDC)
+        elif item.type == "attack":
+            enemy.take_damage(item.prop)
+            print(bcolors.FAIL + "\n" + item.name + " deals", str(item.prop), "points of damage" + bcolors.ENDC)
 
     enemy_choice = 1
 
