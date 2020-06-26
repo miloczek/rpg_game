@@ -44,12 +44,17 @@ print(bcolors.FAIL + bcolors.BOLD + "AN ENEMY ATTACKS!" + bcolors.ENDC)
 
 while running:
     print("================================")
+
+    print("\n\n")
+
     for player in players:
-        print("\n\n")
         player.get_stats()
-        print("\n")
+
+    print("\n")
+
+    for player in players:
         player.choose_action()
-        choice = input("Choose action:")
+        choice = input("    Choose action:")
         index = int(choice) - 1
 
         if index == 0:
@@ -59,7 +64,7 @@ while running:
         elif index == 1:
             player.choose_magic()
             print("    0. Back to main menu")
-            magic_choice = int(input("Choose magic:")) - 1
+            magic_choice = int(input("    Choose magic:")) - 1
 
             if magic_choice == -1:
                 continue
@@ -85,7 +90,7 @@ while running:
         elif index == 2:
             player.choose_item()
             print("    0. Back to main menu")
-            item_choice = int(input("Choose item: ")) - 1
+            item_choice = int(input("    Choose item: ")) - 1
 
             if item_choice == -1:
                 continue
