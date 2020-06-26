@@ -2,6 +2,22 @@ from classes.game import Person, bcolors
 from classes.magic import Spell
 from classes.inventory import Item
 
+print("\n\n")
+print("NAME                          HP                                    MP")
+print("                              ________________________              ________________")
+print(bcolors.BOLD + "Lambert:       " +
+      "      460/460 |" + bcolors.OKGREEN + "███████████████" +  bcolors.ENDC +  bcolors.BOLD +
+      "|       "+
+      "65/65 |" + bcolors.OKBLUE + "██████████" + bcolors.ENDC +"|")
+
+print("                              ________________________           __________")
+print("Vesemir:             460/460 |                        |    65/65|          |")
+
+print("                              ________________________           __________")
+print("Eskel:             460/460 |                        |    65/65|          |")
+
+print("\n\n")
+
 #Create Witcher Signs
 igni = Spell("Igni", 20, 200, "sign")
 aard = Spell("Aard", 8, 100, "sign")
@@ -30,8 +46,10 @@ player_items = [{"item": swallow, "quantity": 15}, {"item": enhanced_swallow, "q
                 {"item": full_moon, "quantity": 2}, {"item":dancing_star, "quantity": 5}]
 
 #Characters
-player = Person(460, 65, 60, 34, player_magic, player_items)
-enemy = Person(1200, 65, 45, 25, [], [])
+player1 = Person("Lambert", 460, 65, 60, 34, player_magic, player_items)
+player2 = Person("Vesemir", 460, 65, 60, 34, player_magic, player_items)
+player3 = Person("Eskel", 460, 65, 60, 34, player_magic, player_items)
+enemy = Person("Ghoul", 1200, 65, 45, 25, [], [])
 
 running = True
 
